@@ -1,55 +1,55 @@
 #!/usr/bin/env bash
-# REAP installer — installs the Skills/ prompt packs into your AI coding agent.
-#
-# Usage:
-#   ./setup.sh [agent]     agent: hermes | claude-code | codex | all (default: all detected)
-#
-# What it does:
-#   1. Regenerates Skills/ and system_prompt.md from readme.md (if python3 present)
-#   2. Copies every Skills/reap-* folder into the agent's skills directory
+# Install REAP skills for installed coding agents.
 set -euo pipefail
-cd "$(dirname "$0")"
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
 
-REGEN=0
-if command -v python3 >/dev/null 2>&1; then
-  python3 tools/build_skills.py && python3 tools/build_system_prompt.py && REGEN=1
-else
-  echo "note: python3 not found — installing the Skills/ folder as committed"
-fi
-
-target_dirs() {
-  local agent="${1:-all}"
-  case "$agent" in
-    hermes)     echo "$HOME/.hermes/skills" ;;
-    claude-code|claude) echo "$HOME/.claude/skills" ;;
-    codex)      echo "$HOME/.codex/skills" ;;
-    all)
-      [ -d "$HOME/.hermes" ] && echo "$HOME/.hermes/skills"
-      [ -d "$HOME/.claude" ] && echo "$HOME/.claude/skills"
-      [ -d "$HOME/.codex" ]  && echo "$HOME/.codex/skills"
-      ;;
-    *) echo "unknown agent: $agent (use: hermes | claude-code | codex | all)" >&2; exit 1 ;;
-  esac
-}
-
-dirs="$(target_dirs "${1:-all}")"
-if [ -z "$dirs" ]; then
-  echo "No supported agent directory found (~/.hermes, ~/.claude, ~/.codex)."
-  echo "Install manually: copy Skills/reap-* into your agent's skills folder."
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "ERROR: Python 3 is required to regenerate REAP skills." >&2
   exit 1
 fi
 
-count=0
-for d in $dirs; do
-  mkdir -p "$d"
-  for s in Skills/reap-*; do
-    rm -rf "$d/$(basename "$s")"
-    cp -R "$s" "$d/"
-    count=$((count+1))
-  done
-  echo "installed $count skill pack(s) -> $d"
-done
+python3 tools/build_skills.py
+python3 tools/build_system_prompt.py
 
-echo
-echo "REAP installed. Reload your agent session to pick up the skills."
-echo "Full-library system prompt (optional paste): $(pwd)/system_prompt.md"
+agent="${1:-all}"
+targets=()
+case "$agent" in
+  hermes) targets=("$HOME/.hermes/skills") ;;
+  claude-code|claude) targets=("$HOME/.claude/skills") ;;
+  codex) targets=("$HOME/.codex/skills") ;;
+  all)
+    [[ ! -d "$HOME/.hermes" ]] || targets+=("$HOME/.hermes/skills")
+    [[ ! -d "$HOME/.claude" ]] || targets+=("$HOME/.claude/skills")
+    [[ ! -d "$HOME/.codex" ]] || targets+=("$HOME/.codex/skills")
+    ;;
+  *)
+    echo "ERROR: Invalid agent '$agent' (hermes | claude-code | codex | all)." >&2
+    exit 2
+    ;;
+esac
+
+if (( ${#targets[@]} == 0 )); then
+  echo "ERROR: No agent directory detected; choose hermes, claude-code or codex explicitly." >&2
+  exit 1
+fi
+
+shopt -s nullglob
+packs=(Skills/reap-*/)
+if (( ${#packs[@]} != 26 )); then
+  echo "ERROR: Expected 26 REAP skill directories, found ${#packs[@]}." >&2
+  exit 1
+fi
+
+for target in "${targets[@]}"; do
+  mkdir -p -- "$target"
+  count=0
+  for src in "${packs[@]}"; do
+    name="${src#Skills/}"
+    name="${name%/}"
+    mkdir -p -- "$target/$name"
+    cp -R -- "$src/." "$target/$name/"
+    ((count+=1))
+  done
+  echo "Installed $count skills into $target"
+done
+echo "Reload your agent to load the updated REAP skills."
