@@ -24,19 +24,23 @@ if "%AGENT%"=="" set "AGENT=all"
 
 if /i "%AGENT%"=="hermes" (
   call :install "%USERPROFILE%\.hermes\skills"
-  exit /b %errorlevel%
+  if errorlevel 1 exit /b 1
+  exit /b 0
 )
 if /i "%AGENT%"=="claude-code" (
   call :install "%USERPROFILE%\.claude\skills"
-  exit /b %errorlevel%
+  if errorlevel 1 exit /b 1
+  exit /b 0
 )
 if /i "%AGENT%"=="claude" (
   call :install "%USERPROFILE%\.claude\skills"
-  exit /b %errorlevel%
+  if errorlevel 1 exit /b 1
+  exit /b 0
 )
 if /i "%AGENT%"=="codex" (
   call :install "%USERPROFILE%\.codex\skills"
-  exit /b %errorlevel%
+  if errorlevel 1 exit /b 1
+  exit /b 0
 )
 if /i not "%AGENT%"=="all" (
   echo ERROR: Invalid agent "%AGENT%". 1>&2
