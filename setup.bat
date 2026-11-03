@@ -1,5 +1,5 @@
 @echo off
-setlocal EnableExtensions EnableDelayedExpansion
+setlocal EnableExtensions
 cd /d "%~dp0"
 
 where python >nul 2>&1
@@ -21,32 +21,63 @@ if errorlevel 1 exit /b 1
 
 set "AGENT=%~1"
 if "%AGENT%"=="" set "AGENT=all"
-set "TARGETS="
-if /i "%AGENT%"=="hermes" set "TARGETS=%USERPROFILE%\.hermes\skills"
-if /i "%AGENT%"=="claude-code" set "TARGETS=%USERPROFILE%\.claude\skills"
-if /i "%AGENT%"=="claude" set "TARGETS=%USERPROFILE%\.claude\skills"
-if /i "%AGENT%"=="codex" set "TARGETS=%USERPROFILE%\.codex\skills"
-if /i "%AGENT%"=="all" (
-  if exist "%USERPROFILE%\.hermes" set "TARGETS=!TARGETS!;"%USERPROFILE%\.hermes\skills""
-  if exist "%USERPROFILE%\.claude" set "TARGETS=!TARGETS!;"%USERPROFILE%\.claude\skills""
-  if exist "%USERPROFILE%\.codex" set "TARGETS=!TARGETS!;"%USERPROFILE%\.codex\skills""
+
+if /i "%AGENT%"=="hermes" (
+  call :install "%USERPROFILE%\.hermes\skills"
+  exit /b %errorlevel%
 )
-if not defined TARGETS (
-  echo ERROR: No matching agent directory found, or unsupported agent. 1>&2
-  exit /b 1
+if /i "%AGENT%"=="claude-code" (
+  call :install "%USERPROFILE%\.claude\skills"
+  exit /b %errorlevel%
+)
+if /i "%AGENT%"=="claude" (
+  call :install "%USERPROFILE%\.claude\skills"
+  exit /b %errorlevel%
+)
+if /i "%AGENT%"=="codex" (
+  call :install "%USERPROFILE%\.codex\skills"
+  exit /b %errorlevel%
+)
+if /i not "%AGENT%"=="all" (
+  echo ERROR: Invalid agent "%AGENT%". 1>&2
+  exit /b 2
 )
 
-set /a COUNT=0
-for %%D in (!TARGETS:;= !) do (
-  if not exist "%%~D" mkdir "%%~D"
+set "FOUND="
+if exist "%USERPROFILE%\.hermes" (
+  call :install "%USERPROFILE%\.hermes\skills"
   if errorlevel 1 exit /b 1
-  for /d %%S in ("Skills\reap-*") do (
-    if not exist "%%~D\%%~nxS" mkdir "%%~D\%%~nxS"
-    xcopy /e /i /q /y "%%~fS\*" "%%~D\%%~nxS\" >nul
-    if errorlevel 1 exit /b 1
-    set /a COUNT+=1
-  )
-  echo Installed REAP packs into %%~D
+  set "FOUND=1"
+)
+if exist "%USERPROFILE%\.claude" (
+  call :install "%USERPROFILE%\.claude\skills"
+  if errorlevel 1 exit /b 1
+  set "FOUND=1"
+)
+if exist "%USERPROFILE%\.codex" (
+  call :install "%USERPROFILE%\.codex\skills"
+  if errorlevel 1 exit /b 1
+  set "FOUND=1"
+)
+if not defined FOUND (
+  echo ERROR: No supported agent directory detected. 1>&2
+  exit /b 1
 )
 echo Install complete. Reload your agent session.
+exit /b 0
+
+:install
+set "TARGET=%~1"
+if not exist "%TARGET%" mkdir "%TARGET%"
+if errorlevel 1 exit /b 1
+set /a COUNT=0
+for /d %%S in ("Skills\reap-*") do (
+  if not exist "%TARGET%\%%~nxS" mkdir "%TARGET%\%%~nxS"
+  if errorlevel 1 exit /b 1
+  xcopy /e /i /q /y "%%~fS\*" "%TARGET%\%%~nxS\" >nul
+  if errorlevel 1 exit /b 1
+  set /a COUNT+=1
+)
+if not exist "%TARGET%\reap-prompts\SKILL.md" exit /b 1
+echo Installed REAP skills to "%TARGET%"
 exit /b 0
