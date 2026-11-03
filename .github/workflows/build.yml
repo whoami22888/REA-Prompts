@@ -1,0 +1,44 @@
+name: REAP build validation
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run generator tests
+        shell: bash
+        run: |
+          python -m compileall -q tools tests
+          python -m unittest discover -s tests -v
+          python tools/build_skills.py
+          python tools/build_system_prompt.py
+          test -f Skills/reap-08-android/SKILL.md
+          test -f Skills/reap-prompts/SKILL.md
+      - name: Linux installation smoke test
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          export HOME="$RUNNER_TEMP/test agent home"
+          mkdir -p "$HOME/.codex"
+          bash setup.sh codex
+          test -f "$HOME/.codex/skills/reap-prompts/SKILL.md"
+      - name: Windows installation smoke test
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          set "USERPROFILE=%RUNNER_TEMP%\test agent home"
+          mkdir "%USERPROFILE%\.codex"
+          call setup.bat codex
+          if errorlevel 1 exit /b 1
+          if not exist "%USERPROFILE%\.codex\skills\reap-prompts\SKILL.md" exit /b 1
