@@ -24,11 +24,20 @@ call :install "%USERPROFILE%\.codex\skills" || exit /b 1
 goto done
 :all
 set "FOUND=0"
-if exist "%USERPROFILE%\.hermes" call :install "%USERPROFILE%\.hermes\skills" || exit /b 1
+if exist "%USERPROFILE%\.hermes" (
+  call :install "%USERPROFILE%\.hermes\skills"
+  if errorlevel 1 exit /b 1
+)
 if exist "%USERPROFILE%\.hermes" set "FOUND=1"
-if exist "%USERPROFILE%\.claude" call :install "%USERPROFILE%\.claude\skills" || exit /b 1
+if exist "%USERPROFILE%\.claude" (
+  call :install "%USERPROFILE%\.claude\skills"
+  if errorlevel 1 exit /b 1
+)
 if exist "%USERPROFILE%\.claude" set "FOUND=1"
-if exist "%USERPROFILE%\.codex" call :install "%USERPROFILE%\.codex\skills" || exit /b 1
+if exist "%USERPROFILE%\.codex" (
+  call :install "%USERPROFILE%\.codex\skills"
+  if errorlevel 1 exit /b 1
+)
 if exist "%USERPROFILE%\.codex" set "FOUND=1"
 if "%FOUND%"=="0" (
   echo No supported agent directory found. Specify hermes, claude-code or codex to create one. 1>&2

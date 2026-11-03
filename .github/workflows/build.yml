@@ -2,7 +2,7 @@ name: Validate REAP builds and installers
 
 on:
   push:
-    branches: [main, rea-agent-master-rebuilt-ccb02b8]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -34,6 +34,9 @@ jobs:
           bash ./setup.sh codex
           test -f "$HOME/.codex/skills/reap-prompts/SKILL.md"
           test "$(find "$HOME/.codex/skills" -name SKILL.md | wc -l)" -eq 26
+          mkdir -p "$HOME/.claude"
+          bash ./setup.sh all
+          test "$(find "$HOME/.claude/skills" -name SKILL.md | wc -l)" -eq 26
           bash ./setup.sh codex
           test "$(find "$HOME/.codex/skills" -name SKILL.md | wc -l)" -eq 26
       - name: Test Windows installer with spaces and repeat installation
@@ -48,3 +51,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Repeated installation failed" }
           $skills = Get-ChildItem (Join-Path $env:USERPROFILE '.codex/skills') -Recurse -Filter SKILL.md
           if ($skills.Count -ne 26) { throw "Expected 26 installed skills; got $($skills.Count)" }
+          New-Item -ItemType Directory -Path (Join-Path $env:USERPROFILE '.claude') -Force | Out-Null
+          cmd /c setup.bat all
+          if ($LASTEXITCODE -ne 0) { throw "Install-all failed" }
+          $claudeSkills = Get-ChildItem (Join-Path $env:USERPROFILE '.claude/skills') -Recurse -Filter SKILL.md
+          if ($claudeSkills.Count -ne 26) { throw "Expected 26 Claude skills; got $($claudeSkills.Count)" }
