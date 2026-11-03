@@ -1,6 +1,6 @@
 ---
 name: reap-18-advanced-binary-exploration-and-deobfuscation
-description: REA prompt pack:  Advanced binary exploration & deobfuscation (8 ready-to-paste prompts). Use when doing reverse-engineering investigation of advanced binary exploration & deobfuscation with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Advanced binary exploration & deobfuscation (8 ready-to-paste prompts). Use when doing reverse-engineering investigation of advanced binary exploration & deobfuscation with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 18. Advanced binary exploration & deobfuscation

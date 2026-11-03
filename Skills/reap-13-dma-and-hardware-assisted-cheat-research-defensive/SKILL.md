@@ -1,6 +1,6 @@
 ---
 name: reap-13-dma-and-hardware-assisted-cheat-research-defensive
-description: REA prompt pack:  DMA & hardware-assisted cheat research (defensive) (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of dma & hardware-assisted cheat research (defensive) with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: DMA & hardware-assisted cheat research (defensive) (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of dma & hardware-assisted cheat research (defensive) with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 13. DMA & hardware-assisted cheat research (defensive)

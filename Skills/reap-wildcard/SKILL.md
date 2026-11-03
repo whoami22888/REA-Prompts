@@ -1,6 +1,6 @@
 ---
 name: reap-wildcard
-description: REA prompt pack:  Wildcard prompt (0 ready-to-paste prompts). Use when doing reverse-engineering investigation of wildcard prompt with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Wildcard prompt (1 ready-to-paste prompts). Use when doing reverse-engineering investigation of wildcard prompt with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — Wildcard prompt (start here)

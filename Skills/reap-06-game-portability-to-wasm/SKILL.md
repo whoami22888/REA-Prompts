@@ -1,6 +1,6 @@
 ---
 name: reap-06-game-portability-to-wasm
-description: REA prompt pack:  Game portability to WASM (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of game portability to wasm with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Game portability to WASM (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of game portability to wasm with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 6. Game portability to WASM

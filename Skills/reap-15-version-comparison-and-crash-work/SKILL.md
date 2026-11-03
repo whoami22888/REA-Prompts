@@ -1,6 +1,6 @@
 ---
 name: reap-15-version-comparison-and-crash-work
-description: REA prompt pack:  Version comparison & crash work (1 ready-to-paste prompts). Use when doing reverse-engineering investigation of version comparison & crash work with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Version comparison & crash work (1 ready-to-paste prompts). Use when doing reverse-engineering investigation of version comparison & crash work with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 15. Version comparison & crash work

@@ -1,0 +1,58 @@
+name: Validate REAP builds and installers
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Generate and install (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check generated files
+        run: |
+          python tools/build_skills.py --check
+          python tools/build_system_prompt.py --check
+          python -m unittest discover -s tests -v
+      - name: Test Linux/macOS style installer with spaces and repeat installation
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          export HOME="$(mktemp -d)/Home With Spaces"
+          mkdir -p "$HOME"
+          bash ./setup.sh codex
+          test -f "$HOME/.codex/skills/reap-prompts/SKILL.md"
+          test "$(find "$HOME/.codex/skills" -name SKILL.md | wc -l)" -eq 26
+          mkdir -p "$HOME/.claude"
+          bash ./setup.sh all
+          test "$(find "$HOME/.claude/skills" -name SKILL.md | wc -l)" -eq 26
+          bash ./setup.sh codex
+          test "$(find "$HOME/.codex/skills" -name SKILL.md | wc -l)" -eq 26
+      - name: Test Windows installer with spaces and repeat installation
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $env:USERPROFILE = Join-Path $env:RUNNER_TEMP 'User With Spaces'
+          New-Item -ItemType Directory -Path $env:USERPROFILE -Force | Out-Null
+          cmd /c setup.bat codex
+          if ($LASTEXITCODE -ne 0) { throw "First installation failed" }
+          cmd /c setup.bat codex
+          if ($LASTEXITCODE -ne 0) { throw "Repeated installation failed" }
+          $skills = Get-ChildItem (Join-Path $env:USERPROFILE '.codex/skills') -Recurse -Filter SKILL.md
+          if ($skills.Count -ne 26) { throw "Expected 26 installed skills; got $($skills.Count)" }
+          New-Item -ItemType Directory -Path (Join-Path $env:USERPROFILE '.claude') -Force | Out-Null
+          cmd /c setup.bat all
+          if ($LASTEXITCODE -ne 0) { throw "Install-all failed" }
+          $claudeSkills = Get-ChildItem (Join-Path $env:USERPROFILE '.claude/skills') -Recurse -Filter SKILL.md
+          if ($claudeSkills.Count -ne 26) { throw "Expected 26 Claude skills; got $($claudeSkills.Count)" }

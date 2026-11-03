@@ -1,6 +1,6 @@
 ---
 name: reap-09-kernel-analysis
-description: REA prompt pack:  Kernel analysis (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of kernel analysis with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Kernel analysis (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of kernel analysis with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 9. Kernel analysis

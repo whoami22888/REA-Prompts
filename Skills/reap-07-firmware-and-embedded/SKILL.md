@@ -1,6 +1,6 @@
 ---
 name: reap-07-firmware-and-embedded
-description: REA prompt pack:  Firmware & embedded (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of firmware & embedded with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Firmware & embedded (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of firmware & embedded with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 7. Firmware & embedded

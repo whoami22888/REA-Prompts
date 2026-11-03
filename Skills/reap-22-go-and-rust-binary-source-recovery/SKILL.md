@@ -1,6 +1,6 @@
 ---
 name: reap-22-go-and-rust-binary-source-recovery
-description: REA prompt pack:  Go & Rust binary source recovery (7 ready-to-paste prompts). Use when doing reverse-engineering investigation of go & rust binary source recovery with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Go & Rust binary source recovery (7 ready-to-paste prompts). Use when doing reverse-engineering investigation of go & rust binary source recovery with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 22. Go & Rust binary source recovery

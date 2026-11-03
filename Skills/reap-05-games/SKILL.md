@@ -1,6 +1,6 @@
 ---
 name: reap-05-games
-description: REA prompt pack:  Games (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of games with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Games (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of games with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 5. Games

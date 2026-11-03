@@ -1,6 +1,6 @@
 ---
 name: reap-00-install-and-verify
-description: REA prompt pack:  Install & verify (0 ready-to-paste prompts). Use when doing reverse-engineering investigation of install & verify with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Install & verify (1 ready-to-paste prompts). Use when doing reverse-engineering investigation of install & verify with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 0. Install & verify

@@ -31,7 +31,7 @@ What you get:
 
 - **`Skills/`** — 26 skill packs, one folder per section (`reap-00-install-and-verify` … `reap-22-go-and-rust-binary-source-recovery`, plus `reap-prompts` index, `reap-wildcard` and `reap-prompt-writing-tips`), each a `SKILL.md` with YAML frontmatter the agent auto-loads when relevant.
 - **`system_prompt.md`** — the whole library as a single document you can paste into any agent's system prompt / custom instructions instead of installing skills.
-- **`tools/build_skills.py`** and **`tools/build_system_prompt.py`** — regenerate `Skills/` and `system_prompt.md` from `readme.md` (the setup scripts run them automatically; `readme.md` stays the source of truth).
+- **`tools/build_skills.py`** and **`tools/build_system_prompt.py`** — regenerate `Skills/` and `system_prompt.md` explicitly from `README.md` (the canonical source). Installers copy the checked-in skills without running build tools or modifying generated files. Run `python3 tools/build_skills.py` and `python3 tools/build_system_prompt.py` when the README changes; use `--check` with either command to detect drift.
 
 ## Sources & credits
 

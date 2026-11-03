@@ -1,6 +1,6 @@
 ---
 name: reap-14-software-cracking-research
-description: REA prompt pack:  Software cracking research (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of software cracking research with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Software cracking research (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of software cracking research with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 14. Software cracking research
