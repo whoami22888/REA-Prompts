@@ -1457,5 +1457,5 @@ propose tests to verify it.
 
 - Source prompt: [system_prompt.md](https://github.com/whoami22888/REA-Prompts/blob/ccb02b89721dd7d466beb17004a89d6bc25f5b02/system_prompt.md); source index: [Skills/reap-prompts/SKILL.md](https://github.com/whoami22888/REA-Prompts/blob/ccb02b89721dd7d466beb17004a89d6bc25f5b02/Skills/reap-prompts/SKILL.md).
 - The original REAP project is MIT licensed. Copyright (c) 2025 Joas Antonio dos Santos. Preserve the original [MIT licence](https://github.com/whoami22888/REA-Prompts/blob/ccb02b89721dd7d466beb17004a89d6bc25f5b02/LICENSE) and attribution when redistributing.
-- The repository snapshot does not include `tools/build_skills.py` or `tools/build_system_prompt.py`, although the setup scripts reference them. Do not run setup expecting successful regeneration until those files are restored or the scripts are corrected.
+- The original repository snapshot was missing `tools/build_skills.py` and `tools/build_system_prompt.py`. These generators and the cross-platform installer repairs are included in this PR. Their execution is covered by GitHub Actions build validation.
 - This document consolidates instructions; it does not confirm availability of REA analysis tools or authorize actions against third-party systems.
