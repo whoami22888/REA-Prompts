@@ -1,6 +1,6 @@
 ---
 name: reap-20-advanced-software-cloning-and-feature-reconstruction
-description: REA prompt pack:  Advanced software cloning & feature reconstruction (5 ready-to-paste prompts). Use when doing reverse-engineering investigation of advanced software cloning & feature reconstruction with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Advanced software cloning & feature reconstruction (5 ready-to-paste prompts). Use when doing reverse-engineering investigation of advanced software cloning & feature reconstruction with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 20. Advanced software cloning & feature reconstruction

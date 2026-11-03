@@ -1,6 +1,6 @@
 ---
 name: reap-11-electron-and-javascript
-description: REA prompt pack:  Electron & JavaScript (11 ready-to-paste prompts). Use when doing reverse-engineering investigation of electron & javascript with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Electron & JavaScript (11 ready-to-paste prompts). Use when doing reverse-engineering investigation of electron & javascript with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 11. Electron & JavaScript

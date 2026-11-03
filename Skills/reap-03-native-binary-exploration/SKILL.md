@@ -1,6 +1,6 @@
 ---
 name: reap-03-native-binary-exploration
-description: REA prompt pack:  Native binary exploration (5 ready-to-paste prompts). Use when doing reverse-engineering investigation of native binary exploration with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Native binary exploration (5 ready-to-paste prompts). Use when doing reverse-engineering investigation of native binary exploration with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 3. Native binary exploration

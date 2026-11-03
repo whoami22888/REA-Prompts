@@ -1,6 +1,6 @@
 ---
 name: reap-04-software-and-feature-cloning
-description: REA prompt pack:  Software & feature cloning (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of software & feature cloning with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Software & feature cloning (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of software & feature cloning with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 4. Software & feature cloning

@@ -1,6 +1,6 @@
 ---
 name: reap-08-android
-description: REA prompt pack:  Android (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of android with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Android (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of android with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 8. Android

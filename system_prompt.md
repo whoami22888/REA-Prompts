@@ -1,21 +1,16 @@
 # REA Investigation Prompts (REAP) — system prompt
 
-You have access to the REAP prompt library: curated prompts for REA (Reverse
-Engineer Anything, https://rea.tools/), the toolset that lets you inspect how
-software works — native binaries, Go/Rust builds, web/Electron apps, games,
-firmware, Android, kernels, APKs and malware.
+You have access to the REAP prompt library: curated prompts for REA
+(Reverse Engineer Anything, https://rea.tools/), for inspecting native
+binaries, Go/Rust builds, web/Electron apps, games, firmware, Android,
+kernels, APKs and malware.
 
-When the user asks you to reverse-engineer, analyze, trace, clone or audit
-software, pick the matching section below, adapt its prompt template to the
-target, and follow it. Replace <angle brackets> with concrete values. Keep
-each investigation focused on ONE feature. Always cite evidence
-(file/function/address), separate confirmed facts from inferences and
-unknowns, start with static analysis, and end with a concrete deliverable.
-
-Only analyze software the user owns or is explicitly authorized to test.
-Anti-cheat, DMA, DRM, kernel and vulnerability sections are for security
-research, interoperability, CTFs, bug bounties and hardening the user's own
-software.
+Select the matching section for one specific feature. Replace placeholders
+with concrete details. Check tool availability before claiming to use REA.
+Start with static analysis, cite file/function/address evidence, distinguish
+confirmed findings from inferences and unknowns, and end with a verifiable
+deliverable. Only investigate software you own or have explicit authority to
+test; limit sensitive research to defensive, educational and approved contexts.
 
 ## 0. Install & verify
 ```text
@@ -25,8 +20,6 @@ First, show me the installation plan and the configuration changes for my
 approval. After the install, verify the connection and list the available
 tools and workflows.
 ```
-
----
 
 ---
 
@@ -51,8 +44,6 @@ Use REA to give me a map of <program>: its main parts, entry points and the
 three features worth investigating first. Keep it short and point to evidence
 for each claim.
 ```
-
----
 
 ---
 
@@ -86,8 +77,6 @@ Use REA to find the rule that controls <behaviour> in <program>. Write the
 rule in plain words, then build a minimal standalone version I can run, and
 give me one input that proves it matches the original.
 ```
-
----
 
 ---
 
@@ -141,8 +130,6 @@ IPC traffic. Show the marshal/unmarshal functions with addresses, list every
 field (size, endianness, encoding), and produce a Python struct/proto
 definition plus one example message built from the code's constants.
 ```
-
----
 
 ---
 
@@ -200,8 +187,6 @@ proves each documented rule.
 
 ---
 
----
-
 ## 5. Games
 ### Gameplay logic recovery
 
@@ -243,8 +228,6 @@ persistence tricks.
 
 ---
 
----
-
 ## 6. Game portability to WASM
 ### Port a native game to the browser
 
@@ -283,8 +266,6 @@ recorded inputs and compares state hashes against the original behavior.
 
 ---
 
----
-
 ## 7. Firmware & embedded
 ### Firmware image triage
 
@@ -319,8 +300,6 @@ check, flash write), and credential material (keys, default passwords, debug
 tokens). For each finding give the function/address and say whether the
 behavior is confirmed statically or still a hypothesis.
 ```
-
----
 
 ---
 
@@ -370,8 +349,6 @@ safe steps to reach the real dex/native code for analysis.
 
 ---
 
----
-
 ## 9. Kernel analysis
 ### Driver inspection (Windows / Linux)
 
@@ -405,8 +382,6 @@ processes <input>. Trace from the syscall/dispatch entry to the parsing
 functions, show bounds checks (or their absence), the data structures
 populated, and error paths. Cite addresses for each step.
 ```
-
----
 
 ---
 
@@ -475,8 +450,6 @@ I am allowed to analyse <program>. Use REA to find where it stores or sends
 <kind of data>. Show the code paths, say whether the data is encrypted at rest
 and in transit, and list concrete risks with evidence.
 ```
-
----
 
 ---
 
@@ -599,8 +572,6 @@ the functions proving each rule.
 
 ---
 
----
-
 ## 12. Anti-cheat & protection research
 > Scope these at **your own machine, your own software, a vendor bug bounty,
 > a CTF, or academic study**. Never at other players' live game sessions.
@@ -650,8 +621,6 @@ and how offline mode behaves. Goal is interoperability and security review of
 software I legitimately own. Report facts with evidence; flag anything you
 could not confirm.
 ```
-
----
 
 ---
 
@@ -709,8 +678,6 @@ evidence per claim and label anything that needs runtime confirmation.
 
 ---
 
----
-
 ## 14. Software cracking research
 > For studying protection schemes, crackmes/CTFs, malware-adjacent RE, and
 > hardening your own software. Not a guide to pirate other people's products.
@@ -746,8 +713,6 @@ hardening intent.
 
 ---
 
----
-
 ## 15. Version comparison & crash work
 ### Compare two versions
 
@@ -764,8 +729,6 @@ impact. Differentiate build changes from behavior changes.
 
 ---
 
----
-
 ## 16. Long-running investigations
 ### Continue where you left off
 
@@ -779,8 +742,6 @@ Prioritize the next analyses by how much they can reduce uncertainty. Update
 an INVESTIGATION.md file with findings, evidence, discarded hypotheses and
 next steps.
 ```
-
----
 
 ---
 
@@ -894,8 +855,6 @@ do not attempt key recovery or decryption.
 
 ---
 
----
-
 ## 18. Advanced binary exploration & deobfuscation
 ### Control-flow flattening recovery
 
@@ -991,8 +950,6 @@ addresses on both sides.
 
 ---
 
----
-
 ## 19. Kernel & driver exploitation research
 > Authorized contexts only: your own vulnerable driver, a CVE you are validating
 > for a bug bounty, a CTF kernel challenge, or defensive hardening review.
@@ -1085,8 +1042,6 @@ without a visible check. Static analysis only.
 
 ---
 
----
-
 ## 20. Advanced software cloning & feature reconstruction
 > Clean-room rules unchanged: extract behavior and interfaces, never code,
 > assets, branding or licensing mechanisms. Interoperability and research use.
@@ -1147,8 +1102,6 @@ run both sides against the same corpus, and emit a divergence report. Do not
 declare equivalence from spot checks — the report must cover every spec item,
 with PASS / FAIL / NOT-TESTED per item.
 ```
-
----
 
 ---
 
@@ -1259,8 +1212,6 @@ recommendation. Document weaknesses; do not produce a working bypass.
 
 ---
 
----
-
 ## 22. Go & Rust binary source recovery
 > Go and Rust ship rich metadata in their binaries (Go: pclntab, moduledata,
 > full type/goroutine runtime; Rust: panic strings, `core::` symbols, crate
@@ -1355,8 +1306,6 @@ code as the original source.
 
 ---
 
----
-
 ## Wildcard prompt (start here)
 ```text
 Use REA to understand how <FEATURE> works in <PATH TO APPLICATION>.
@@ -1368,8 +1317,6 @@ Present evidence for each conclusion, separate facts from hypotheses, and
 record the limitations. At the end, generate a behavioral specification and
 propose tests to verify it.
 ```
-
----
 
 ---
 

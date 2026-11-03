@@ -1,6 +1,6 @@
 ---
 name: reap-21-protector-and-obfuscator-research
-description: REA prompt pack:  Protector & obfuscator research (7 ready-to-paste prompts). Use when doing reverse-engineering investigation of protector & obfuscator research with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Protector & obfuscator research (7 ready-to-paste prompts). Use when doing reverse-engineering investigation of protector & obfuscator research with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 21. Protector & obfuscator research

@@ -1,6 +1,6 @@
 ---
 name: reap-16-long-running-investigations
-description: REA prompt pack:  Long-running investigations (1 ready-to-paste prompts). Use when doing reverse-engineering investigation of long-running investigations with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Long-running investigations (1 ready-to-paste prompts). Use when doing reverse-engineering investigation of long-running investigations with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 16. Long-running investigations

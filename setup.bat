@@ -1,87 +1,59 @@
 @echo off
-setlocal EnableExtensions
-cd /d "%~dp0"
-
-where python >nul 2>&1
-if not errorlevel 1 (
-  set "PYTHON=python"
-) else (
-  where py >nul 2>&1
-  if errorlevel 1 (
-    echo ERROR: Python 3 is required. 1>&2
-    exit /b 1
-  )
-  set "PYTHON=py -3"
-)
-
-%PYTHON% tools\build_skills.py
-if errorlevel 1 exit /b 1
-%PYTHON% tools\build_system_prompt.py
-if errorlevel 1 exit /b 1
-
+setlocal EnableExtensions DisableDelayedExpansion
+rem Install checked-in REAP skills; regeneration is an explicit developer step.
+set "ROOT=%~dp0"
 set "AGENT=%~1"
 if "%AGENT%"=="" set "AGENT=all"
-
-if /i "%AGENT%"=="hermes" (
-  call :install "%USERPROFILE%\.hermes\skills"
-  if errorlevel 1 exit /b 1
-  exit /b 0
-)
-if /i "%AGENT%"=="claude-code" (
-  call :install "%USERPROFILE%\.claude\skills"
-  if errorlevel 1 exit /b 1
-  exit /b 0
-)
-if /i "%AGENT%"=="claude" (
-  call :install "%USERPROFILE%\.claude\skills"
-  if errorlevel 1 exit /b 1
-  exit /b 0
-)
-if /i "%AGENT%"=="codex" (
-  call :install "%USERPROFILE%\.codex\skills"
-  if errorlevel 1 exit /b 1
-  exit /b 0
-)
-if /i not "%AGENT%"=="all" (
-  echo ERROR: Invalid agent "%AGENT%". 1>&2
-  exit /b 2
-)
-
-set "FOUND="
-if exist "%USERPROFILE%\.hermes" (
-  call :install "%USERPROFILE%\.hermes\skills"
-  if errorlevel 1 exit /b 1
-  set "FOUND=1"
-)
-if exist "%USERPROFILE%\.claude" (
-  call :install "%USERPROFILE%\.claude\skills"
-  if errorlevel 1 exit /b 1
-  set "FOUND=1"
-)
-if exist "%USERPROFILE%\.codex" (
-  call :install "%USERPROFILE%\.codex\skills"
-  if errorlevel 1 exit /b 1
-  set "FOUND=1"
-)
-if not defined FOUND (
-  echo ERROR: No supported agent directory detected. 1>&2
+if not "%~2"=="" goto usage
+if /I "%AGENT%"=="hermes" goto hermes
+if /I "%AGENT%"=="claude" goto claude
+if /I "%AGENT%"=="claude-code" goto claude
+if /I "%AGENT%"=="codex" goto codex
+if /I "%AGENT%"=="all" goto all
+:usage
+echo usage: setup.bat [hermes^|claude-code^|codex^|all] 1>&2
+exit /b 2
+:hermes
+call :install "%USERPROFILE%\.hermes\skills" || exit /b 1
+goto done
+:claude
+call :install "%USERPROFILE%\.claude\skills" || exit /b 1
+goto done
+:codex
+call :install "%USERPROFILE%\.codex\skills" || exit /b 1
+goto done
+:all
+set "FOUND=0"
+if exist "%USERPROFILE%\.hermes" call :install "%USERPROFILE%\.hermes\skills" || exit /b 1
+if exist "%USERPROFILE%\.hermes" set "FOUND=1"
+if exist "%USERPROFILE%\.claude" call :install "%USERPROFILE%\.claude\skills" || exit /b 1
+if exist "%USERPROFILE%\.claude" set "FOUND=1"
+if exist "%USERPROFILE%\.codex" call :install "%USERPROFILE%\.codex\skills" || exit /b 1
+if exist "%USERPROFILE%\.codex" set "FOUND=1"
+if "%FOUND%"=="0" (
+  echo No supported agent directory found. Specify hermes, claude-code or codex to create one. 1>&2
   exit /b 1
 )
-echo Install complete. Reload your agent session.
-exit /b 0
-
+goto done
 :install
-set "TARGET=%~1"
-if not exist "%TARGET%" mkdir "%TARGET%"
-if errorlevel 1 exit /b 1
+set "DEST=%~1"
+if not exist "%DEST%" mkdir "%DEST%" || exit /b 1
 set /a COUNT=0
-for /d %%S in ("Skills\reap-*") do (
-  if not exist "%TARGET%\%%~nxS" mkdir "%TARGET%\%%~nxS"
-  if errorlevel 1 exit /b 1
-  xcopy /e /i /q /y "%%~fS\*" "%TARGET%\%%~nxS\" >nul
-  if errorlevel 1 exit /b 1
-  set /a COUNT+=1
+for /d %%S in ("%ROOT%Skills\reap-*") do (
+  if exist "%%~fS\SKILL.md" (
+    xcopy /E /I /Q /Y "%%~fS" "%DEST%\%%~nxS" >nul
+    if errorlevel 1 exit /b 1
+    set /a COUNT+=1
+  )
 )
-if not exist "%TARGET%\reap-prompts\SKILL.md" exit /b 1
-echo Installed REAP skills to "%TARGET%"
+if not "%COUNT%"=="26" (
+  echo Expected 26 REAP skills, installed %COUNT% 1>&2
+  exit /b 1
+)
+echo installed %COUNT% skill packs -^> "%DEST%"
+exit /b 0
+:done
+echo.
+echo REAP installed. Reload your agent session to discover the skills.
+echo Full-library system prompt: "%ROOT%system_prompt.md"
 exit /b 0

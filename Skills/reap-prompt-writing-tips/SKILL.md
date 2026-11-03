@@ -1,6 +1,6 @@
 ---
 name: reap-prompt-writing-tips
-description: REA prompt pack:  Prompt-writing tips (0 ready-to-paste prompts). Use when doing reverse-engineering investigation of prompt-writing tips with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Prompt-writing tips (0 ready-to-paste prompts). Use when doing reverse-engineering investigation of prompt-writing tips with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — Prompt-writing tips (why these work)

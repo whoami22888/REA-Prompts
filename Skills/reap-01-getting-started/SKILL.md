@@ -1,6 +1,6 @@
 ---
 name: reap-01-getting-started
-description: REA prompt pack:  Getting started (2 ready-to-paste prompts). Use when doing reverse-engineering investigation of getting started with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Getting started (2 ready-to-paste prompts). Use when doing reverse-engineering investigation of getting started with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 1. Getting started

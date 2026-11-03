@@ -1,6 +1,6 @@
 ---
 name: reap-12-anti-cheat-and-protection-research
-description: REA prompt pack:  Anti-cheat & protection research (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of anti-cheat & protection research with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Anti-cheat & protection research (4 ready-to-paste prompts). Use when doing reverse-engineering investigation of anti-cheat & protection research with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 12. Anti-cheat & protection research

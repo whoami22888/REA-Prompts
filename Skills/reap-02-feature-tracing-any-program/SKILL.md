@@ -1,6 +1,6 @@
 ---
 name: reap-02-feature-tracing-any-program
-description: REA prompt pack:  Feature tracing (any program) (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of feature tracing (any program) with REA (rea.tools) via an AI coding agent.
+description: "REA prompt pack: Feature tracing (any program) (3 ready-to-paste prompts). Use when doing reverse-engineering investigation of feature tracing (any program) with REA (rea.tools) via an AI coding agent."
 ---
 
 # REAP — 2. Feature tracing (any program)

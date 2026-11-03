@@ -1,17 +1,17 @@
 ---
 name: reap-prompts
-description: REAP master index: curated REA prompts for reverse engineering with AI coding agents (native binaries, Go/Rust source recovery, web/Electron, games, firmware, Android, kernel, malware, anti-cheat, protectors, cloning). Use when pointing an agent at RE work.
+description: "REAP master index: curated REA prompts for reverse engineering with AI coding agents (native binaries, Go/Rust source recovery, web/Electron, games, firmware, Android, kernel, malware, anti-cheat, protectors, cloning). Use when pointing an agent at RE work."
 ---
 
 # REAP — REA Investigation Prompts (skill index)
 
-A curated collection of prompts for [REA](https://rea.tools/) — the toolset that lets your AI coding agent inspect how software works. Each pack below is a sibling skill folder in this directory; load the one matching the target, paste a prompt and replace <angle brackets>.
+A curated collection of prompts for [REA](https://rea.tools/). Select the matching sibling skill folder, then adapt one prompt to the target.
 
-> Use responsibly. Only analyze software you own or are explicitly authorized to test. Anti-cheat, DMA, DRM, kernel and vulnerability packs are for security research, interoperability, CTFs, bug bounties and testing your own software.
+> Only analyze owned or explicitly authorized software. Sensitive research must stay within approved defensive, lab or CTF scope.
 
 | Skill | Section | Prompts |
 |---|---|---|
-| `reap-00-install-and-verify` | 0. Install & verify | 0 |
+| `reap-00-install-and-verify` | 0. Install & verify | 1 |
 | `reap-01-getting-started` | 1. Getting started | 2 |
 | `reap-02-feature-tracing-any-program` | 2. Feature tracing (any program) | 3 |
 | `reap-03-native-binary-exploration` | 3. Native binary exploration | 5 |
@@ -34,8 +34,8 @@ A curated collection of prompts for [REA](https://rea.tools/) — the toolset th
 | `reap-20-advanced-software-cloning-and-feature-reconstruction` | 20. Advanced software cloning & feature reconstruction | 5 |
 | `reap-21-protector-and-obfuscator-research` | 21. Protector & obfuscator research | 7 |
 | `reap-22-go-and-rust-binary-source-recovery` | 22. Go & Rust binary source recovery | 7 |
-| `reap-prompt-writing-tips` | Prompt-writing tips (why these work) | 0 |
-| `reap-wildcard` | Wildcard prompt (start here) | 0 |
+| `reap-prompt-writing-tips` | Prompt-writing tips | 0 |
+| `reap-wildcard` | Wildcard prompt | 1 |
 
 ## Wildcard prompt (start here)
 
@@ -49,6 +49,8 @@ Present evidence for each conclusion, separate facts from hypotheses, and
 record the limitations. At the end, generate a behavioral specification and
 propose tests to verify it.
 ```
+
+---
 
 ## Prompt-writing tips (why these work)
 
